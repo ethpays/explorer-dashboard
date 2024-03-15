@@ -5,7 +5,7 @@ import PublicIcon from '@mui/icons-material/Public';
 export default function BlockHero() {
   return (
     <>
-      <div className="mt-12 col-span-full lg:col-span-2 w-[100%] overflow-hidden flex justify-between items-center p-6 rounded-[10px] border border-[--ui-dark-border-color] bg-ethpays">
+      <div className="mt-12 col-span-full lg:col-span-2 w-[100%] overflow-hidden flex justify-between items-center py-3 px-4 rounded-[10px] border border-[--ui-dark-border-color] bg-ethpays">
         <div className="w-1/3 border-r border-[--ui-dark-border-color]">
           <div className="flex items-center justify-between">
             <div className="flex items-center">
