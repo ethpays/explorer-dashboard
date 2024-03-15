@@ -1,5 +1,3 @@
-<img src="./public/preview/ethpays-futures.png" alt="diagram"/>
-
 # EthPays Explorer Frontend
 
 This is the official EthPays repository for the frontend website used to run the Exchange Explorer.
