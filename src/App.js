@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'; // Us
 import './css/scrollbar.css';
 
 import NotFound from './pages/not-found';
+import Home from './pages/home';
 
 const theme = createTheme({
   palette: {
@@ -53,7 +54,7 @@ function App() {
     <ThemeProvider theme={theme}>
         <Router>
             <Routes>
-                <Route path="/" element={<h1>ciao</h1>} />
+                <Route path="/" element={<Home />} />
                 <Route path="*" element={<NotFound />} />
             </Routes>
         </Router>
