@@ -3,7 +3,7 @@ import SearchIcon from '@mui/icons-material/Search';
 
 export default function SearchHero() {
   return (
-    <div className="ml-72 mr-72 w-full">
+    <>
       <h1 className="text-3xl font-medium mb-4">The EthPays Explorer</h1>
       <TextField
         className="border text-sm rounded-lg mt block w-[650px] dark:bg-ethpays-50 dark:border-ethpays-50 dark:placeholder-ethpays dark:text-ethpays_white dark:focus:ring-ethpays_green dark:focus:border-ethpays_green"
@@ -35,7 +35,7 @@ export default function SearchHero() {
           endAdornment: (
             <>
               <InputAdornment position="end">
-                <button className="text-ethpays_white bg-ethpays-100 -mr-1 p-1 rounded hover:text-ethpays_white-50">
+                <button className="text-ethpays_white bg-ethpays-100 -mr-1 p-1 rounded-[8px] hover:text-ethpays_white-50">
                   <SearchIcon />
                 </button>
               </InputAdornment>
@@ -43,6 +43,6 @@ export default function SearchHero() {
           ),
         }}
       />
-    </div>
+    </>
   )
 }
