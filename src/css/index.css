@@ -1,0 +1,30 @@
+@import url('https://fonts.cdnfonts.com/css/harmonyos-sans');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  margin: 0;
+  font-family: 'HarmonyOS Sans', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: black;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+.st0 {
+  fill: #E60000;
+}
+
+.st1 {
+  fill: #ffffff;
+}
+
+*:focus {
+  outline: none;
+}
