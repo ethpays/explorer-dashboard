@@ -8,14 +8,8 @@ import { Link, useLocation } from 'react-router-dom';
 import "../css/navbar.css";
 
 export default function NavBarHero() {
-  const [type, setType] = useState(0);
   const [openTransaction, setOpenTransaction] = useState(false);
-
   const location = useLocation();
-
-  const handleType = (value) => {
-    setType(value);
-  };
 
   return(
     <section id="navbar" className="sticky top-0 z-50">

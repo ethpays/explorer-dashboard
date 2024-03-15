@@ -1,13 +1,10 @@
-import React, { useState } from 'react';
+import React from 'react';
 import ReceiptLongIcon from '@mui/icons-material/ReceiptLong';
 import StorageIcon from '@mui/icons-material/Storage';
-import Skeleton from '@mui/material/Skeleton';
 import { Link } from 'react-router-dom';
 import ArrowRightAltIcon from '@mui/icons-material/ArrowRightAlt';
 
 export default function BlockHero2() {
-  const [loading, setLoading] = useState(false);
-
   const transactionId = "a8c4a726-b1fc-4f6c-a383-74f23e2a5188";
   return (
     <div className="flex flex-col items-start mt-12 text-ethpays_white w-[75%]">
@@ -29,8 +26,7 @@ export default function BlockHero2() {
             </div>
           </div>
         </>
-      </div
-      >
+      </div>
       {Array(7).fill(0).map((_, i) => (
       <div className="col-span-full lg:col-span-2 w-full overflow-hidden flex justify-between items-center py-2 px-4 border border-[--ui-dark-border-color] bg-ethpays">
         <>
