@@ -30,7 +30,7 @@ export default function NavBarHero() {
 
           <VerticalDivider />
           <div className="flex items-center space-x-2">
-            <Link to="/api" className={`flex items-center pl-[6px] pr-[6px] pt-[3px] pb-[3px] rounded-md hover:bg-ethpays-50 ${location.pathname === "/api" ? "bg-ethpays-50" : ""}`}>
+            <Link to="/api" className={`flex items-center pl-[6px] pr-[6px] pt-[3px] pb-[3px] rounded-md hover:bg-ethpays-50 ${location.pathname === "/balance" ? "bg-ethpays-50" : ""}`}>
               <p className="text-ethpays_white">Api</p>
             </Link>
 
