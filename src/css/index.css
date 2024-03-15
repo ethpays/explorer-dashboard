@@ -34,7 +34,6 @@ code {
   background: url('../images/illustration-section-01.svg') no-repeat;
   width: 100%;
   height: 286px;
-  position: top;
-  margin-top: -60px;
+  position: absolute;
   z-index: -1;
 }
