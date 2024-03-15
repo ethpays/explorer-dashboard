@@ -35,7 +35,10 @@ module.exports = {
         },
         ethpays_red: {
           DEFAULT: '#ca3f64',
-        }
+        },
+        ethpays_blue: {
+          DEFAULT: '#5ab5db',
+        },
       },
     },
     colors: ({ colors }) => ({
