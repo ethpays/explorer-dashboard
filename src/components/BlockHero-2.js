@@ -38,7 +38,7 @@ export default function BlockHero2() {
                 </div>
                 <div className="text-ethpays_white text-sm font-medium ml-4">
                   <p className="text-ethpays_white font-medium">
-                    <Link to={`/transaction/${transactionId}`} className="text-ethpays_green hover:text-ethpays_green-50">
+                    <Link to={`/tx/${transactionId}`} className="text-ethpays_green hover:text-ethpays_green-50">
                       {transactionId.substring(0, 8) + '... ' + transactionId.slice(-8)}
                     </Link>
                   </p>

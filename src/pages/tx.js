@@ -10,6 +10,7 @@ import VerifiedIcon from '@mui/icons-material/Verified';
 import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
 import RequestQuoteIcon from '@mui/icons-material/RequestQuote';
 import BoltIcon from '@mui/icons-material/Bolt';
+import { Link } from 'react-router-dom';
 
 import NavBarHero from "../components/NavBarHero";
 
@@ -101,18 +102,19 @@ export default function Tx() {
                   <BoltIcon className="text-ethpays_white-50 mr-1" />
                   <p className="text-ethpays_white-50 text-lg">Summary:</p>
                 </div>
-                <p className="text-ethpays_white text-base">
-                  <span className="text-ethpays_white-50 mr-1">
-                    Transfer
+                <p className="text-ethpays_white-50 text-base">
+                  Transfer
+                  <span className="text-ethpays_white ml-1">
+                    333.12 Usdt
                   </span>
-                  333.12 Usdt, From:
-                  <span className="text-ethpays_green mx-1">
+                  , From:
+                  <Link to={`/tx/asd`} className="text-ethpays_green hover:text-ethpays_green-50 mx-1">
                     etp08...0usdt
-                  </span>
+                  </Link>
                   To:
-                  <span className="text-ethpays_green mx-1">
+                  <Link to={`/tx/asd`} className="text-ethpays_green hover:text-ethpays_green-50 mx-1">
                     etp07...0usdt
-                  </span>
+                  </Link>
                 </p>
               </div>
 
