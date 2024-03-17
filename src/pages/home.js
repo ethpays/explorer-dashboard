@@ -10,7 +10,7 @@ export default function Home() {
     <div>
       <NavBarHero />
       <div className="flex flex-col items-start mt-12 text-ethpays_white illustration-section-01 w-full">
-        <div className="px-72 w-full">
+        <div className="w-full 2xl:px-72 lg:px-24 sm:px-12 md:px-12">
           <SearchHero />
           <BlockHero/>
           <div className="flex justify-center">

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import Tooltip from '@mui/material/Tooltip';
 import ReceiptIcon from '@mui/icons-material/Receipt';
@@ -10,12 +10,44 @@ import VerifiedIcon from '@mui/icons-material/Verified';
 import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
 import RequestQuoteIcon from '@mui/icons-material/RequestQuote';
 import BoltIcon from '@mui/icons-material/Bolt';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { formatDistanceToNow } from 'date-fns';
 
 import NavBarHero from "../components/NavBarHero";
 
 export default function Tx() {
+  const navigate = useNavigate();
   const { txid } = useParams();
+  const [loading, setLoading] = useState(true);
+  const [txData, setTxData] = useState(null);
+
+  useEffect(() => {
+    async function fetchTxData() {
+      const response = await fetch(process.env.REACT_APP_ETHPAYS_BACKEND_FU + `transaction/${txid}`);
+      const data = await response.json();
+
+      if (!data || data.ok === "false") {
+        navigate("/not-found");
+      } else if (data.ok === "true") {
+        setTxData(data);
+        setLoading(false);
+      } else {
+        console.error("Unknown error");
+      }
+    }
+    fetchTxData();
+  }, [txid]);
+
+  if (loading) {
+    return (
+      <div>
+        <NavBarHero />
+        <div className="flex justify-center items-center h-screen">
+          <p className="text-ethpays_white">Loading...</p>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div>
@@ -30,14 +62,14 @@ export default function Tx() {
                   <ReceiptIcon className="text-ethpays_white-50 mr-1" />
                   <p className="text-ethpays_white-50 text-lg">Transaction id:</p>
                 </div>
-                <p className="text-ethpays_white text-base">{txid}</p>
+                <p className="text-ethpays_white text-base">{txData.txid}</p>
               </div>
               <div className="flex justify-start">
                 <div className="min-w-[20%] flex items-center">
                   <AccessTimeIcon className="text-ethpays_white-50 mr-1" />
                   <p className="text-ethpays_white-50 text-lg">Timestamp:</p>
                 </div>
-                <p className="text-ethpays_white text-base">1 day ago (2342342344)</p>
+                <p className="text-ethpays_white text-base">{formatDistanceToNow(new Date(txData.timestamp * 1))} ago ({txData.timestamp})</p>
               </div>
               <div className="flex justify-start">
                 <div className="min-w-[20%] flex items-center">
@@ -55,7 +87,7 @@ export default function Tx() {
                   <p className="text-ethpays_white-50 text-lg">From:</p>
                 </div>
                 <p className="text-ethpays_white text-base flex items-center">
-                  etp08000000000000000000000000000000000usdt
+                  {txData.from}
                   <Tooltip title="Verified Employee Account">
                     <span className="flex items-center ml-2">
                       (<VerifiedIcon fontSize="10" className="text-ethpays_blue"/>EthPays: anto6314)
@@ -69,7 +101,7 @@ export default function Tx() {
                   <p className="text-ethpays_white-50 text-lg">To:</p>
                 </div>
                 <p className="text-ethpays_white text-base flex items-center">
-                  etp07000000000000000000000000000000000usdt 
+                  {txData.to}
                   <Tooltip title="Verified Employee Account">
                     <span className="flex items-center ml-2">
                       (<VerifiedIcon fontSize="10" className="text-ethpays_blue"/>EthPays: anto6314)
@@ -85,7 +117,7 @@ export default function Tx() {
                   <AttachMoneyIcon className="text-ethpays_white-50 mr-1" />
                   <p className="text-ethpays_white-50 text-lg">Value:</p>
                 </div>
-                <p className="text-ethpays_white text-base">$333.12 Usdt</p>
+                <p className="text-ethpays_white text-base">{parseFloat(txData.amount).toLocaleString('it-IT', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} {txData.currency.charAt(0).toUpperCase() + txData.currency.slice(1)}</p>
               </div>
               <div className="flex justify-start">
                 <div className="min-w-[20%] flex items-center">
@@ -105,15 +137,15 @@ export default function Tx() {
                 <p className="text-ethpays_white-50 text-base">
                   Transfer
                   <span className="text-ethpays_white ml-1">
-                    333.12 Usdt
+                  {parseFloat(txData.amount).toLocaleString('it-IT', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} {txData.currency.charAt(0).toUpperCase() + txData.currency.slice(1)}
                   </span>
                   , From:
-                  <Link to={`/tx/asd`} className="text-ethpays_green hover:text-ethpays_green-50 mx-1">
-                    etp08...0usdt
+                  <Link to={`/address/` + txData.from} className="text-ethpays_green hover:text-ethpays_green-50 mx-1">
+                    {txData.from.substring(0, 5) + '...' + txData.from.slice(-5)}
                   </Link>
                   To:
-                  <Link to={`/tx/asd`} className="text-ethpays_green hover:text-ethpays_green-50 mx-1">
-                    etp07...0usdt
+                  <Link to={`/address/` + txData.to} className="text-ethpays_green hover:text-ethpays_green-50 mx-1">
+                    {txData.to.substring(0, 5) + '...' + txData.to.slice(-5)}
                   </Link>
                 </p>
               </div>
