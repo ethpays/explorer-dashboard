@@ -6,6 +6,7 @@ import './css/scrollbar.css';
 import NotFound from './pages/not-found';
 import Home from './pages/home';
 import Tx from './pages/tx';
+import EthPaysTx from './pages/ethpays-tx';
 
 const theme = createTheme({
   palette: {
@@ -57,6 +58,7 @@ function App() {
             <Routes>
                 <Route path="/" element={<Home />} />
                 <Route path="/tx/:txid" element={<Tx />} />
+                <Route path="/ethpays-transactions" element={<EthPaysTx />} />
                 <Route path="*" element={<NotFound />} />
             </Routes>
         </Router>

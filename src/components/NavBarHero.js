@@ -45,7 +45,7 @@ export default function NavBarHero() {
                 Recent Transactions
               </Dropdown.Item>
               <Dropdown.Item>
-                EthPays Transactions
+                <Link to="/ethpays-transactions" className="text-ethpays_white">EthPays Transactions</Link>
               </Dropdown.Item>
               <Dropdown.Item>
                 Top Transactions

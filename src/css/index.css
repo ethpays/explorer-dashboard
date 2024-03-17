@@ -37,3 +37,7 @@ code {
   position: absolute;
   z-index: -1;
 }
+
+.apexcharts-treemap-rect .apexcharts-treemap rect {
+  stroke: #620f0f !important;
+}
