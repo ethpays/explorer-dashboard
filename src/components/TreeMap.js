@@ -1,48 +1,13 @@
-import React from "react";
+import React, {useState, useEffect, useRef} from "react";
 import Chart from "react-apexcharts";
 import { useNavigate } from "react-router-dom";
 
-const balanceSeries = [
-  {
-    data: [
-      {
-        x: "0.5 BTC",
-        y: 33542.88,
-        transactionId: "a8c4a726-b1fc-4f6c-a383-74f23e2a5188",
-      },
-      {
-        x: "12 ETH",
-        y: 42932.28,
-        transactionId: "a8c4a726-b1fc-4f6c-a383-74f23e2a5188",
-      },
-      {
-        x: "1.5 BTC",
-        y: 100628.63,
-        transactionId: "a8c4a726-b1fc-4f6c-a383-74f23e2a5188",
-      },
-      {
-        x: "525'000 XRP",
-        y: 325103.43,
-        transactionId: "a8c4a726-b1fc-4f6c-a383-74f23e2a5188",
-      },
-      {
-        x: "2000 LTC",
-        y: -171616.73,
-        transactionId: "a8c4a726-b1fc-4f6c-a383-74f23e2a5188",
-      }
-    ],
-  }
-];
-
-const sortedData = balanceSeries[0].data.sort((a, b) => b.y - a.y);
-const sortedBalanceSeries = [
-  {
-    data: sortedData,
-  },
-];
-
 export default function TreeMap() {
+  const [data, setData] = useState([]);
+  const dataRef = useRef(data);
   const navigate = useNavigate();
+
+  console.log(data) //data: [{…}] (contains actual data from the backend)
 
   const chartConfig = {
     type: "treemap",
@@ -60,8 +25,7 @@ export default function TreeMap() {
         },
         events: {
           dataPointSelection: function(event, chartContext, config) {
-            const selectedData = balanceSeries[0].data[config.dataPointIndex];
-            console.log(selectedData);
+            const selectedData = dataRef.current[config.seriesIndex].data[config.dataPointIndex];
             navigate(`/tx/${selectedData.transactionId}`);
           },
         },
@@ -81,9 +45,9 @@ export default function TreeMap() {
           const transactionId = w.config.series[seriesIndex].data[dataPointIndex].transactionId;
           return (
             '<div class="p-1 flex justify-center items-center">' +
-            "$" + parseFloat(Math.abs(value)).toLocaleString('de-CH', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + " usd" +
-            '</div> <div class="p-1">' +
-            "TX ID: " + transactionId +
+            "$" + parseFloat(Math.abs(value)).toLocaleString('de-CH', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + " usdt" +
+            '</div> <div class="p-1 -mt-2 flex justify-center items-center">' +
+            "TX: " + transactionId +
             '</div>'
           );
         },
@@ -121,12 +85,31 @@ export default function TreeMap() {
       },
     },
   };
+
+  useEffect(() => {
+    async function fetchData() {
+      const response = await fetch(process.env.REACT_APP_ETHPAYS_BACKEND_FU + "transaction/ethpays/top100");
+      const data = await response.json();
+
+      const sortedData = data.sort((a, b) => b.y - a.y);
+      const sortedBalanceSeries = [
+        {
+          data: sortedData,
+        },
+      ];
+
+      setData(sortedBalanceSeries);
+      dataRef.current = sortedBalanceSeries; // Update the mutable reference after setting state
+    }
+    fetchData();
+  }, []);
+
   return (
     <div className="w-full flex flex-col items-center mt-12">
       <h1 className="text-ethpays_white text-3xl font-bold">Ethpays Transactions Heat Map</h1>
       <div className="mt-12 w-[80%] col-span-full overflow-hidden flex justify-center items-center rounded-[10px] border border-[--ui-dark-border-color] bg-ethpays text-ethpays">
         <div style={{ width: '100%', height: '100%' }} className="md:ml-[25px]">
-          <Chart {...chartConfig} series={sortedBalanceSeries} />
+          <Chart {...chartConfig} series={data} />
         </div>
       </div>
     </div>
