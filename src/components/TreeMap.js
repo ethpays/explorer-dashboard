@@ -7,8 +7,6 @@ export default function TreeMap() {
   const dataRef = useRef(data);
   const navigate = useNavigate();
 
-  console.log(data) //data: [{…}] (contains actual data from the backend)
-
   const chartConfig = {
     type: "treemap",
     height: 600,
