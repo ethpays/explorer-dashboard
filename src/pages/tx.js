@@ -76,7 +76,15 @@ export default function Tx() {
                   <DoneAllIcon className="text-ethpays_white-50 mr-1" />
                   <p className="text-ethpays_white-50 text-lg">Status:</p>
                 </div>
-                <p className="bg-[#00a18433] text-xs p-1 rounded-md border border-[#00a184] text-ethpays_green-100">Confirmed</p>
+                {txData.status === "completed" ?
+                  <p className="bg-[#00a18433] text-xs p-1 rounded-md border border-[#00a184] text-ethpays_green-100">Completed</p>
+                : txData.status === "pending" ?
+                  <p className="bg-[#fffc6433] text-xs p-1 rounded-md border border-[#fffc00] text-ethpays_red-100">Pending</p>
+                : txData.status === "failed" ?
+                  <p className="bg-[#ff000033] text-xs p-1 rounded-md border border-[#ff0000] text-ethpays_red-100">Failed</p>
+                :
+                  <p className="bg-[#0093ff33] text-xs p-1 rounded-md border border-[#0093ff] text-ethpays_red-100">Unknown</p>
+                }
               </div>
 
               <div className="w-full border-t border-[--ui-dark-border-color] my-3"></div>
@@ -87,12 +95,16 @@ export default function Tx() {
                   <p className="text-ethpays_white-50 text-lg">From:</p>
                 </div>
                 <p className="text-ethpays_white text-base flex items-center">
-                  {txData.from}
-                  <Tooltip title="Verified Employee Account">
-                    <span className="flex items-center ml-2">
-                      (<VerifiedIcon fontSize="10" className="text-ethpays_blue"/>EthPays: anto6314)
-                    </span>
-                  </Tooltip>
+                  <Link to={`/address/` + txData.from} className="text-ethpays_green hover:text-ethpays_green-50 mx-1">
+                    {txData.from}
+                  </Link>
+                  {txData.from_ethpays_username && (
+                    <Tooltip title="Verified Employee Account">
+                      <span className="flex items-center ml-2">
+                        (<VerifiedIcon fontSize="10" className="text-ethpays_blue"/>EthPays: {txData.from_ethpays_username})
+                      </span>
+                    </Tooltip>
+                  )}
                 </p>
               </div>
               <div className="flex justify-start">
@@ -101,12 +113,16 @@ export default function Tx() {
                   <p className="text-ethpays_white-50 text-lg">To:</p>
                 </div>
                 <p className="text-ethpays_white text-base flex items-center">
-                  {txData.to}
-                  <Tooltip title="Verified Employee Account">
-                    <span className="flex items-center ml-2">
-                      (<VerifiedIcon fontSize="10" className="text-ethpays_blue"/>EthPays: anto6314)
-                    </span>
-                  </Tooltip>
+                  <Link to={`/address/` + txData.to} className="text-ethpays_green hover:text-ethpays_green-50 mx-1">
+                    {txData.to}
+                  </Link>
+                  {txData.to_ethpays_username && (
+                    <Tooltip title="Verified Employee Account">
+                      <span className="flex items-center ml-2">
+                        (<VerifiedIcon fontSize="10" className="text-ethpays_blue"/>EthPays: {txData.to_ethpays_username})
+                      </span>
+                    </Tooltip>
+                  )}
                 </p>
               </div>
 
