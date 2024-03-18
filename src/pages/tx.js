@@ -14,6 +14,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { formatDistanceToNow } from 'date-fns';
 
 import NavBarHero from "../components/NavBarHero";
+import FootBar from "../components/FootBar";
 
 export default function Tx() {
   const navigate = useNavigate();
@@ -50,9 +51,9 @@ export default function Tx() {
   }
 
   return (
-    <div>
+    <div className="flex flex-col min-h-screen">
       <NavBarHero />
-      <div className="flex flex-col items-start mt-12 text-ethpays_white illustration-section-01 w-full">
+      <div className="flex flex-grow items-start mt-12 text-ethpays_white illustration-section-01 w-full">
         <div className="2xl:px-72 lg:px-24 w-full sm:px-12 md:px-12">
           <h1 className="text-ethpays_white text-2xl font-bold">Transaction Overview</h1>
           <div className="mt-4 flex flex-col">
@@ -170,6 +171,7 @@ export default function Tx() {
           </div>
         </div>
       </div>
+      <FootBar />
     </div>
   );
 }

@@ -22,7 +22,7 @@ export default function BlockHero2() {
   }, []);
 
   return (
-    <div className="flex flex-col items-start mt-12 text-ethpays_white 2xl:w-[75%] xl:w-[80%] lg:w-[100%]">
+    <div className="flex flex-col items-start mt-12 text-ethpays_white 2xl:w-[100%] xl:w-[100%] lg:w-[100%]">
       <div className="col-span-full lg:col-span-2 w-full overflow-hidden flex justify-between items-center py-3 px-4 rounded-t-[10px] border border-[--ui-dark-border-color] bg-ethpays">
         <>
           <div className="space-y-3 w-full">
