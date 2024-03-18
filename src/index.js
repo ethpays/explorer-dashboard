@@ -14,10 +14,14 @@ console.log(`%c
                             /____/        
 `, 'color: #768d5c; font-size: 12px; font-weight: bold;');
 
-//make a waring console log printing in red
 console.log(
   '%cPasting code into the console can be dangerous to your computer. If someone told you to copy-paste something here to enable a feature or "hack" someone\'s account, it is a scam and will give them access to your computer',
   'color: red; font-size: 18px; font-weight: semibold;'
+);
+
+console.log(
+  '%cIf instead you know what you are doing and want to contribute to the project, please visit us on our GitHub: https://github.com/ethpays',
+  'color: #768d5c; font-size: 18px; font-weight: semibold;'
 );
 
 root.render(
